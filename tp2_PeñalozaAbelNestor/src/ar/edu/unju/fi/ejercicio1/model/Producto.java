@@ -3,7 +3,7 @@ package ar.edu.unju.fi.ejercicio1.model;
 public class Producto {
 	private int codigo;
 	private String Descripcion;
-	private Double precioUnitario;
+	private double precioUnitario;
 	private OrigenFabricacion origenFabricacion;
 	private Categoria categoria;
 	
@@ -34,7 +34,7 @@ public class Producto {
 	 * @param origenFabricacion
 	 * @param categoria
 	 */
-	public Producto(int codigo, String descripcion, Double precioUnitario, OrigenFabricacion origenFabricacion,
+	public Producto(int codigo, String descripcion, double precioUnitario, OrigenFabricacion origenFabricacion,
 			Categoria categoria) {
 		this.codigo = codigo;
 		Descripcion = descripcion;
@@ -62,11 +62,11 @@ public class Producto {
 		Descripcion = descripcion;
 	}
 
-	public Double getPrecioUnitario() {
+	public double getPrecioUnitario() {
 		return precioUnitario;
 	}
 
-	public void setPrecioUnitario(Double precioUnitario) {
+	public void setPrecioUnitario(double precioUnitario) {
 		this.precioUnitario = precioUnitario;
 	}
 
@@ -88,8 +88,8 @@ public class Producto {
 
 	@Override
 	public String toString() {
-		return "Producto [codigo=" + codigo + ", Descripcion=" + Descripcion + ", precioUnitario=" + precioUnitario
-				+ ", origenFabricacion=" + origenFabricacion + ", categoria=" + categoria + "]";
+		return "Producto codigo= " + codigo + ", Descripcion= " + Descripcion + ", precioUnitario= " + precioUnitario
+				+ ", origenFabricacion= " + origenFabricacion + ", categoria= " + categoria;
 	}
 	
 	
