@@ -77,6 +77,7 @@ public class Main {
 		sc.nextLine();//Limpiar buffer
 		}
 	}
+	
 	//Metodo para obtener el mes
 	private static Mes obtenerMes(int numMes) {
         Mes[] meses = Mes.values();
@@ -87,7 +88,77 @@ public class Main {
             return Mes.ENERO;
         }
     }
-	
+	//Metodo para mostrar las Efemerides
+	private static void mostrarEfemerides() {
+		System.out.println("\nEfemerides.");
+		for(Efemeride efemeride : listaEfemerides) {
+			System.out.println(efemeride.getCodigo() + ": " + efemeride.getMes()
+					+ " " + efemeride.getDia()+ " - " + efemeride.getDetalle());
+		}
+	}
+	//Metodo para eliminar una Efemeride
+	private static void eliminarEfemeride() {
+		System.out.println("\nEliminar Efemeride.");
+		try {
+			System.out.print("Ingrese el codigo de la Efemeride a eliminar: ");
+			Integer codigoEliminar = sc.nextInt();
+			boolean eliminado = false;
+			for(Efemeride efemeride : listaEfemerides) {
+				if(efemeride.getCodigo().equals(codigoEliminar)) {
+					listaEfemerides.remove(efemeride);
+					eliminado = true;
+					break;
+				}
+			}
+			if(eliminado) {
+				System.out.println("Efemeride eliminado correctamente.");
+			}else {
+				System.out.println("No se encontro una Efemeride con ese codigo.");
+			}
+		}catch (InputMismatchException e) {
+			System.out.println("Error: al ingresar el codigo. Ingrese un numero entero.");
+			sc.nextLine();//Limpiar buffer
+		}
+	}
+	//Metodo que modifica una Efemeride.
+	private static void modificarEfemeride() {
+		System.out.println("\nModificar una Efemeride.");
+		try {
+			System.out.print("Ingrese el codigo de la Efemeride a modificar: ");
+			Integer codigoModificar = sc.nextInt();
+			sc.nextLine();//Limpiar buffer
+			Efemeride efemerideModificar = null;
+			
+			for(Efemeride efemeride : listaEfemerides) {
+				if(efemeride.getCodigo().equals(codigoModificar)) {
+					efemerideModificar = efemeride;
+					break;
+				}
+			}
+			if(efemerideModificar != null) {
+				System.out.println("Ingrese los nuevos datos.");
+				System.out.print("Ingrese el numero de mes (1 - 12): ");
+				int numMes = sc.nextInt();
+				efemerideModificar.setMes(obtenerMes(numMes));
+				
+				System.out.print("Ingrese el nuevo dia: ");
+				Byte nuevoDia = sc.nextByte();
+				efemerideModificar.setDia(nuevoDia);
+				sc.nextLine();
+				System.out.print("Ingrese nuevo Detallle: ");
+				String nuevoDetalle = sc.nextLine();
+				efemerideModificar.setDetalle(nuevoDetalle);
+				System.out.println("Efemeride modificada correctamente.");
+				
+			}else {
+				System.out.println("No se encontro una Efemeride con ese codigo.");
+			}
+			
+		}catch(InputMismatchException e) {
+			System.out.println("Error: al ingresar el codigo, asegurese de ingresar un numero entero.");
+			sc.nextLine();//Limpiar buffer
+		}
+	}
 		
 }
 
