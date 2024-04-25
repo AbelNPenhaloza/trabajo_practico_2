@@ -1,5 +1,7 @@
 package ar.edu.unju.fi.ejercicio3.constantes;
 
+import java.text.DecimalFormat;
+
 public enum Provincia {
 	JUJUY,
 	SALTA,
@@ -11,6 +13,7 @@ public enum Provincia {
 	private Integer cantidadPoblacion;
 	private Double superficie;
 	/**
+	 * Constructor Provincia
 	 * @param cantidadPoblacion
 	 * @param superficie
 	 */
@@ -19,11 +22,14 @@ public enum Provincia {
 		this.superficie = null;
 	}
 	//Metodo para calcular la densidad Poblacional de una Provincia.
-	public Double calcularDensidadPoblacional() {
+	public double calcularDensidadPoblacional() {
 		if(cantidadPoblacion != null && superficie != null && superficie !=0) {
-			return cantidadPoblacion / superficie;
+			double densidad = (double)cantidadPoblacion / superficie;
+			DecimalFormat df = new DecimalFormat ("#,##");
+			
+			return Double.parseDouble(df.format(densidad));
 		}else {
-			return 0.0;
+			return 0.0;//Menejo cuando los valores no estan definidos
 		}
 	}
 	//Metodos accesores
