@@ -3,12 +3,12 @@ package ar.edu.unju.fi.ejercicio3.constantes;
 import java.text.DecimalFormat;
 
 public enum Provincia {
-	JUJUY,
-	SALTA,
-	TUCUMAN,
-	CATAMARCA,
-	LA_RIOJA,
-	SANTIAGO_DEL_ESTERO;
+	JUJUY(811611, 53219.76),//datos 2022
+    SALTA(1333365, 155488.65),
+    TUCUMAN(1687305, 22524.8),
+    CATAMARCA(367828, 102602.1),
+    LA_RIOJA(384607, 89680.6),
+    SANTIAGO_DEL_ESTERO(988245, 136351.81);
 	
 	private Integer cantidadPoblacion;
 	private Double superficie;
@@ -17,10 +17,10 @@ public enum Provincia {
 	 * @param cantidadPoblacion
 	 * @param superficie
 	 */
-	private Provincia() {
-		this.cantidadPoblacion = null;
-		this.superficie = null;
-	}
+	private Provincia(Integer cantidadPoblacion, Double superficie) {
+        this.cantidadPoblacion = cantidadPoblacion;
+        this.superficie = superficie;
+    }
 	//Metodo para calcular la densidad Poblacional de una Provincia.
 	public double calcularDensidadPoblacional() {
 		if(cantidadPoblacion != null && superficie != null && superficie !=0) {
@@ -29,7 +29,7 @@ public enum Provincia {
 			
 			return Double.parseDouble(df.format(densidad));
 		}else {
-			return 0.0;//Menejo cuando los valores no estan definidos
+			return 0.0;//Manejo cuando los valores no estan definidos
 		}
 	}
 	//Metodos accesores
