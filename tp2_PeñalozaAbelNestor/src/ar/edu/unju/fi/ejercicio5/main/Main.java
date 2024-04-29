@@ -1,9 +1,11 @@
 package ar.edu.unju.fi.ejercicio5.main;
 
-public class Main {
+import java.util.Scanner;
 
+public class Main {
+	Scanner sc = new Scanner(System.in);
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		
 
 	}
 
