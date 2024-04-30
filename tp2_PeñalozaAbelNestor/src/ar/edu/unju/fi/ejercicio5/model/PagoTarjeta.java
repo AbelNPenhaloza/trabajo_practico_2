@@ -1,6 +1,8 @@
 package ar.edu.unju.fi.ejercicio5.model;
 
+import java.text.DecimalFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import ar.edu.unju.fi.ejercicio5.interfaces.Pago;
 
@@ -25,13 +27,15 @@ public class PagoTarjeta implements Pago{
 	
 	@Override
 	public void realizarPago(double monto){
-		this.montoPagado = monto + (monto * 0.15);
+		DecimalFormat df = new DecimalFormat("#.##");
+		this.montoPagado = Double.parseDouble(df.format(monto * 1.15));//Agrega el 15% al monto por la recarga.
 	}
 	@Override
 	public void imprimirRecibo(){
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		System.out.println("Pago con tarjeta:");
         System.out.println("Número de tarjeta: " + numeroTarjeta);
-        System.out.println("Fecha de pago: " + fechaPago);
+        System.out.println("Fecha de pago: " + fechaPago.format(formatter));
         System.out.println("Monto pagado: " + montoPagado);
 	}
 	

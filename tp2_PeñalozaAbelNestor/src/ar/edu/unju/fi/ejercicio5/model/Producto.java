@@ -77,6 +77,11 @@ public class Producto {
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
+	@Override
+	public String toString() {
+		return "Producto codigo= " + codigo + ", Descripcion= " + Descripcion + ", precioUnitario= " + precioUnitario
+				+ ", activo= " + activo + ", origenFabricacion= " + origenFabricacion + ", categoria= " + categoria;
+	}
 	
 	
 	

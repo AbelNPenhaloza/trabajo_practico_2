@@ -1,10 +1,12 @@
 package ar.edu.unju.fi.ejercicio5.model;
 
+import java.text.DecimalFormat;
 import java.time.LocalDate;
-
+import java.time.format.DateTimeFormatter;
 import ar.edu.unju.fi.ejercicio5.interfaces.Pago;
 
 public class PagoEfectivo implements Pago {
+	
 	private double montoPagado;
 	private LocalDate fechaPago;
 	
@@ -20,14 +22,16 @@ public class PagoEfectivo implements Pago {
 
 	@Override
 	public void realizarPago(double monto) {
-		this.montoPagado = monto - (monto * 0.1);
+		DecimalFormat df = new DecimalFormat("#.##");
+		this.montoPagado = Double.parseDouble(df.format(monto * 0.9));//aplica descuento del 10% 
 
 	}
 
 	@Override
 	public void imprimirRecibo() {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		System.out.println("Pago con efectivo:");
-        System.out.println("Fecha de pago: " + fechaPago);
+        System.out.println("Fecha de pago: " + fechaPago.format(formatter));
         System.out.println("Monto pagado: " + montoPagado);
 
 	}
