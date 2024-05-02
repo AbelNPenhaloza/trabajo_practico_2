@@ -1,5 +1,15 @@
 package ar.edu.unju.ejercicio6.interfaces.funcionales;
 
-public interface Converter {
-
+@FunctionalInterface
+public interface Converter <T, T1>{
+	T1 converter(T t);
+	
+	//Metodos de la interface
+	static <T> boolean isNotNull(T t) {
+		return t != null;
+	}
+	
+	default void mostrarObjeto (T1 t1) {
+		System.out.println("Objeto - " + t1.toString());
+	}
 }
