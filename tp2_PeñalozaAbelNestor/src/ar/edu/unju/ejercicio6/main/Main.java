@@ -7,7 +7,7 @@ import ar.edu.unju.ejercicio6.model.FelinoSalvaje;
 public class Main {
 
 	public static void main(String[] args) {
-		
+		//Codigo programacion Funcional
 		//Crear un felino domestico
 		FelinoDomestico gato = new FelinoDomestico("Garfield", (byte) 45, 12f);
 		
