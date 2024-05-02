@@ -1,21 +1,28 @@
 package ar.edu.unju.fi.ejercicio7.main;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import ar.edu.unju.fi.ejercicio5.model.Producto;
 
 public class Main {
 	private static ArrayList<Producto> productos = new ArrayList<>();
 	private static Scanner sc = new Scanner(System.in);
+	private static Consumer<Producto> imprimirProducto = p -> System.out.println(p);
 	
 	public static void main(String[] args) {
 		cargarProductos();
+		int opcion;
 		
-		while (true) {
+		do{
             mostrarMenu();
-            int opcion = sc.nextInt();
+            System.out.print("Ingrese una opcion: ");
+            opcion = sc.nextInt();
             sc.nextLine(); // Limpiar el buffer de entrada
 
             switch (opcion) {
@@ -39,11 +46,13 @@ public class Main {
                     break;
                 case 7:
                     System.out.println("¡Hasta luego!");
-                    System.exit(0);
+                    break;
                 default:
                     System.out.println("Opción inválida. Por favor, selecciona una opción del menú.");
+                    break;
             }
-        }
+        }while(opcion !=7);
+	
 	}
 	private static void cargarProductos() {
         
@@ -67,6 +76,7 @@ public class Main {
     }
 	
 	private static void mostrarMenu() {
+		
         System.out.println("---------------------Menu-----------------------------");
         System.out.println("1 - Mostrar productos disponibles");
         System.out.println("2 - Mostrar productos no disponibles");
@@ -76,13 +86,55 @@ public class Main {
         System.out.println("6 - Mostrar nombres de productos en mayúsculas");
         System.out.println("7 - Salir");
         System.out.print("Seleccione una opción:");
+                
     }
 	//Opcion 1 del Menu
 	private static void mostrarProductosDisponibles() {
 		
         System.out.println("....... Productos Disponibles .......");
-        Consumer<Producto> consumer = p -> System.out.println(p);
-        productos.stream().filter(Producto::isActivo).forEach(consumer);
+        productos.stream().filter(Producto::isActivo).forEach(imprimirProducto);
+        System.out.println();
     }
 	//Opcion 2 del menu
+	private static void mostrarProductosNodisponibles() {
+		System.out.println("..........Productos No Disponibles ............");
+		Predicate<Producto> filterEstadoFalse = p -> !p.isActivo();
+		productos.stream().filter(filterEstadoFalse).forEach(imprimirProducto);
+		System.out.println();
+	}
+	//Opcion 3
+	private static void incrementarPrecios(){
+		System.out.println("Incrementando precios en un 20%.");
+		Function <Producto, Producto> funcionIncrementar= (p)->{
+			p.setPrecioUnitario(p.getPrecioUnitario()* 1.20);
+		return p;
+		};
+		List<Producto> productosIncrementados = new ArrayList<>();
+		productosIncrementados = productos.stream()
+				.map(funcionIncrementar).collect(Collectors.toList());
+			productosIncrementados.forEach(imprimirProducto);
+			System.out.println();
+	}
+	//opcion 4
+	private static void mostrarProductosElectrohogarDisponibles(){
+		System.out.println("....... Productos de la categoría Electrohogar disponibles .......");
+        Predicate<Producto> filterCategoriaElectrohogar = p -> p.getCategoria() == Producto.Categoria.ELECTROHOGAR && p.isActivo();
+        productos.stream().filter(filterCategoriaElectrohogar).forEach(imprimirProducto);
+        System.out.println();
+	}
+	//opcion 5
+	private static void ordenarProductosPorPrecioDescendente() {
+        System.out.println("....... Productos ordenados por precio de forma descendente .......");
+        productos.stream().sorted((p1, p2) -> Double.compare(p2.getPrecioUnitario(), p1.getPrecioUnitario())).forEach(imprimirProducto);
+        System.out.println();
+    }
+	//opcion 6
+	private static void mostrarNombresEnMayusculas() {
+        System.out.println("....... Nombres de productos en mayúsculas .......");
+        productos.stream().map(p -> {
+            p.setDescripcion(p.getDescripcion().toUpperCase());
+            return p;
+        }).forEach(imprimirProducto);
+        System.out.println();
+    }
 }
